@@ -1,4 +1,7 @@
 # context-fp
+
+![logo](logo.png)
+
 Microscopic functional programming context for TypeScript
 
 ## Features
