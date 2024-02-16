@@ -97,7 +97,13 @@ const addNumber1 = cfp(numbers, ns => ns(1))
 const addNumber2 = cfp(numbers, ns => ns(2))
 const addNumber3 = cfp(numbers, ns => ns(3))
 
-const numbersToString = cfp(numbers, addNumber1, addNumber2, addNumber3, ns => ns().toString())
+const numbersToString = cfp(
+  numbers,
+  addNumber1,
+  addNumber2,
+  addNumber3,
+  ns => ns().toString()
+)
 
 assert.strictEqual(numbersToString({ incNumber: 1 }), '2,3,4')
 ```
