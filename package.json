@@ -1,0 +1,33 @@
+{
+  "name": "context-fp",
+  "version": "0.0.0",
+  "description": "Microscopic functional programming context",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:darky/context-fp.git"
+  },
+  "keywords": [
+    "fp",
+    "functional",
+    "programming",
+    "context"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "prepublishOnly": "npm run build",
+    "test": "npm run build && node --test dist/test.js"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.d.ts"
+  ],
+  "author": "Vladislav Botvin",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "typescript": "^5.3.3"
+  }
+}
