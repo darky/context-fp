@@ -2,7 +2,12 @@
 
 ![logo](logo.png)
 
-Microscopic functional programming context for TypeScript
+Microscopic functional programming context for TypeScript <br/>
+
+## Motivation
+
+if you tired from gygantic TypeScript DI containers, based on classes and decorators, you are in the right place <br/>
+Just use functional programming and don't worry about context passing through functions, it's with you
 
 ## Features
 
