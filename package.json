@@ -1,6 +1,6 @@
 {
   "name": "context-fp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Microscopic functional programming context",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
