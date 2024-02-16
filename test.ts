@@ -7,17 +7,18 @@ test('cfp initialized without args', async () => {
 })
 
 test('cfp basic', async () => {
-  const positiveNumbers = ({ numbers }: { numbers: number[] }) => numbers.filter(n => n > 0)
-  const stringPostfix = () => 'postfix'
-  const positiveNumbersAsString = cfp(positiveNumbers, stringPostfix, (ns, postfix) => `${ns.toString()} ${postfix}`)
-  assert.strictEqual(positiveNumbersAsString({ numbers: [-1, -5, 7, 0, 4] }), '7,4 postfix')
+  type Context = { numbers: number[] }
+  const positiveNumbers = ({ numbers }: Context) => numbers.filter(n => n > 0)
+  const numbersPrefix = () => 'Here is numbers:'
+  const positiveNumbersAsString = cfp(positiveNumbers, numbersPrefix, (ns, prefix) => `${prefix} ${ns.toString()}`)
+  assert.strictEqual(positiveNumbersAsString({ numbers: [-1, -5, 7, 0, 4] }), 'Here is numbers: 7,4')
 })
 
 test('cfp raw', async () => {
   const positiveNumbers = ({ numbers }: { numbers: number[] }) => numbers.filter(n => n > 0)
-  const stringPostfix = () => 'postfix'
-  const positiveNumbersAsString = cfp(positiveNumbers, stringPostfix, (ns, postfix) => `${ns.toString()} ${postfix}`)
-  assert.strictEqual(positiveNumbersAsString.raw([7, 4], 'postfix'), '7,4 postfix')
+  const numbersPrefix = () => 'Here is numbers:'
+  const positiveNumbersAsString = cfp(positiveNumbers, numbersPrefix, (ns, prefix) => `${prefix} ${ns.toString()}`)
+  assert.strictEqual(positiveNumbersAsString.raw([7, 4], 'Here is numbers:'), 'Here is numbers: 7,4')
 })
 
 test('cfp cache', async () => {
@@ -38,12 +39,11 @@ test('cfp di', async () => {
     throw new Error('should not call')
   }
 
-  const fetchUser = ({ mockFetchUser }: { mockFetchUser?: typeof fetchUserFromDB }) =>
-    mockFetchUser?.() ?? fetchUserFromDB()
+  const fetchUser = ({ fetchUser }: { fetchUser?: typeof fetchUserFromDB }) => fetchUser?.() ?? fetchUserFromDB()
 
   const helloWorldUser = cfp(fetchUser, user => user.then(({ name }) => `Hello world, ${name}!`))
 
-  assert.strictEqual(await helloWorldUser({ mockFetchUser: async () => ({ name: 'Vasya' }) }), 'Hello world, Vasya!')
+  assert.strictEqual(await helloWorldUser({ fetchUser: async () => ({ name: 'Vasya' }) }), 'Hello world, Vasya!')
 })
 
 test('cfp generics 1', () => {
