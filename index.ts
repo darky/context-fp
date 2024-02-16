@@ -108,3 +108,13 @@ export function cfp(...fns: ((...args: unknown[]) => unknown)[]) {
     { raw }
   )
 }
+
+export const sfp = <T, S>(fn: (state: S, payload: T) => S, init: S): ((payload?: T) => S) => {
+  let state: S = init
+  return (payload?: T) => {
+    if (payload === void 0) {
+      return state
+    }
+    return (state = fn(state, payload))
+  }
+}
