@@ -36,6 +36,32 @@ assert.strictEqual(
 )
 ```
 
+#### Calculations cached example
+
+```typescript
+import { cfp } from 'context-fp'
+import assert from 'node:assert'
+
+let called = 0
+
+const positiveNumbers = ({ numbers }: { numbers: number[] }) =>
+  (called++, numbers.filter(n => n > 0))
+
+const positiveNumbersLength = cfp(positiveNumbers, ns => ns.length)
+
+const positiveNumbersAsString = cfp(
+  positiveNumbers,
+  positiveNumbersLength,
+  (ns, l) => `${ns.toString()}; length - ${l}`
+)
+
+assert.strictEqual(
+  positiveNumbersAsString({ numbers: [-1, -5, 7, 0, 4] }),
+  '7,4; length - 2'
+)
+assert.strictEqual(called, 1)
+```
+
 #### Unit tests example
 
 ```typescript
@@ -84,7 +110,7 @@ assert.strictEqual(
 )
 ```
 
-### State manager example
+#### State manager example
 
 ```typescript
 import { cfp, sfp } from 'context-fp'
