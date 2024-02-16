@@ -192,3 +192,18 @@ test('generics 10', () => {
   )
   assert.strictEqual(fn({ ctx: 1 }), 11)
 })
+
+test('context is object', async () => {
+  let err: Error
+  const incNumber = (number: number) => number + 1
+  const stringPostfix = () => 'postfix'
+  // @ts-expect-error
+  const positiveNumbersAsString = cfp(incNumber, stringPostfix, (ns, postfix) => `${ns.toString()} ${postfix}`)
+  try {
+    // @ts-expect-error
+    positiveNumbersAsString(1)
+  } catch (e: unknown) {
+    err = e as Error
+  }
+  assert.equal(err!.message, 'Invalid value used as weak map key')
+})
