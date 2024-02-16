@@ -12,7 +12,9 @@
     "fp",
     "functional",
     "programming",
-    "context"
+    "context",
+    "dependency",
+    "injection"
   ],
   "scripts": {
     "clean": "rm -rf dist",
