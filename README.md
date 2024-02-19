@@ -144,4 +144,4 @@ assert.strictEqual(numbersToString({ incNumber: 1 }), '2,3,4')
 
 ## See also
 
-* [context-fp](https://github.com/darky/context-fp-go) - Functional programming context for Golang
+* [context-fp-go](https://github.com/darky/context-fp-go) - Functional programming context for Golang
