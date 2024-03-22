@@ -193,19 +193,12 @@ test('cfp generics 10', () => {
   assert.strictEqual(fn({ ctx: 1 }), 11)
 })
 
-test('cfp context is object', async () => {
-  let err: Error
+test('cfp context is primitive', async () => {
   const incNumber = (number: number) => number + 1
   const stringPostfix = () => 'postfix'
-  // @ts-expect-error
   const positiveNumbersAsString = cfp(incNumber, stringPostfix, (ns, postfix) => `${ns.toString()} ${postfix}`)
-  try {
-    // @ts-expect-error
-    positiveNumbersAsString(1)
-  } catch (e: unknown) {
-    err = e as Error
-  }
-  assert.equal(err!.message, 'Invalid value used as weak map key')
+  const resp = positiveNumbersAsString(1)
+  assert.equal(resp, '2 postfix')
 })
 
 test('sfp basic', () => {
