@@ -145,3 +145,4 @@ assert.strictEqual(numbersToString({ incNumber: 1 }), '2,3,4')
 ## See also
 
 * [context-fp-go](https://github.com/darky/context-fp-go) - Functional programming context for Golang
+* [context-fp-gleam](https://github.com/darky/context-fp-gleam) - Functional programming context for Gleam
