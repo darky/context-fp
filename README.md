@@ -1,5 +1,7 @@
 # context-fp
 
+## Deprecated in favor [klubok](https://github.com/darky/klubok)
+
 ![logo](logo.png)
 
 Microscopic functional programming context for TypeScript <br/>
